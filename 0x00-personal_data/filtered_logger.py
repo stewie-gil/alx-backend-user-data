@@ -8,7 +8,7 @@ from typing import List
 import logging
 
 
-def get_db():
+def get_db() -> connection.MySQLConnection:
     """uses stored environment variables to
     connect to a msql db
     Return: a connector to the database"""
