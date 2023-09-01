@@ -15,10 +15,10 @@ def get_db() -> connection.MySQLConnection:
     connect to a msql db
     Return: a connector to the database"""
 
-    personal_data_db_username = os.getenv('PERSONAL_DATA_DB_USERNAME')
-    personal_data_db_password = os.getenv('PERSONAL_DATA_DB_PASSWORD')
-    personal_data_db_host = os.getenv('PERSONAL_DATA_DB_HOST')
-    personal_data_db_name = os.getenv('PERSONAL_DATA_DB_NAME')
+    personal_data_db_username = os.environ.get('PERSONAL_DATA_DB_USERNAME', 'root')
+    personal_data_db_password = os.environ.get('PERSONAL_DATA_DB_PASSWORD', '')
+    personal_data_db_host = os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
+    personal_data_db_name = os.environ.get('PERSONAL_DATA_DB_NAME')
 
     connection = mysql.connector.connect(
         host=personal_data_db_host,
