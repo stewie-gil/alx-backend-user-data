@@ -7,6 +7,8 @@ import mysql.connector
 from typing import List
 import logging
 
+connection = mysql.connector.connection
+
 
 def get_db() -> connection.MySQLConnection:
     """uses stored environment variables to
@@ -17,7 +19,6 @@ def get_db() -> connection.MySQLConnection:
     personal_data_db_password = os.getenv('PERSONAL_DATA_DB_PASSWORD')
     personal_data_db_host = os.getenv('PERSONAL_DATA_DB_HOST')
     personal_data_db_name = os.getenv('PERSONAL_DATA_DB_NAME')
-    
 
     connection = mysql.connector.connect(
         host=personal_data_db_host,
