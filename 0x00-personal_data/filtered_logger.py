@@ -1,10 +1,31 @@
 #!/usr/bin/env python3
 """ the filter_datum method"""
 
-
+import os
 import re
+import mysql.connector
 from typing import List
 import logging
+
+
+def get_db():
+    """uses stored environment variables to
+    connect to a msql db
+    Return: a connector to the database"""
+
+    personal_data_db_username = os.getenv('PERSONAL_DATA_DB_USERNAME')
+    personal_data_db_password = os.getenv('PERSONAL_DATA_DB_PASSWORD')
+    personal_data_db_host = os.getenv('PERSONAL_DATA_DB_HOST')
+    personal_data_db_name = os.getenv('PERSONAL_DATA_DB_NAME')
+
+    connector = mysql.connector.connect(
+        host=personal_data_db_host,
+        user=personal_data_db_username,
+        password=personal_data_db_password,
+        database=personal_data_db_name
+    )
+
+    return connector
 
 
 def filter_datum(fields: List[str], redaction: str,
