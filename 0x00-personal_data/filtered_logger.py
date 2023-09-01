@@ -71,3 +71,23 @@ def get_logger() -> logging.Logger:
     stream_handler.setFormatter(formatter)
     logger.addHandler(stream_handler)
     return logger
+
+def main():
+    """ log obsfucated Personal info from database"""
+    connect = get_db()
+    cursor = connect.cursor()
+    cursor.execute('SELECT * FROM users')
+    rows = cursor.fetchall()
+
+    logger = get_logger()
+
+    for row in rows:
+        _str = ";".join([f"{field}={value}" for field,
+                        value in zip(PII_FIELDS, row)])
+        logger.info(_str)
+    cursor.close()
+    connect.close()
+
+if __name__ == "__main__":
+    
+    main()
