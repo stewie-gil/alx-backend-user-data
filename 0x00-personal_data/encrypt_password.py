@@ -3,10 +3,9 @@
 
 
 import bcrypt
-from typing import ByteString
 
 
-def hash_password(password: str) -> ByteString:
+def hash_password(password: str) -> bytes:
     """ Expects one string argument name password
     and returns a salted, hashed password, which is a byte string
     """
@@ -14,3 +13,4 @@ def hash_password(password: str) -> ByteString:
 
     hashed = bcrypt.hashpw(byte_string, bcrypt.gensalt())
     return hashed
+
