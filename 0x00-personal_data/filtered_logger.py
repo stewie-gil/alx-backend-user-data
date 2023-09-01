@@ -17,15 +17,16 @@ def get_db():
     personal_data_db_password = os.getenv('PERSONAL_DATA_DB_PASSWORD')
     personal_data_db_host = os.getenv('PERSONAL_DATA_DB_HOST')
     personal_data_db_name = os.getenv('PERSONAL_DATA_DB_NAME')
+    
 
-    connector = mysql.connector.connect(
+    connection = mysql.connector.connect(
         host=personal_data_db_host,
         user=personal_data_db_username,
         password=personal_data_db_password,
         database=personal_data_db_name
     )
 
-    return connector
+    return connection
 
 
 def filter_datum(fields: List[str], redaction: str,
