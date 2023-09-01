@@ -40,13 +40,11 @@ PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'ip')
 def get_logger() -> logging.Logger:
     """Adds loggs to the stderr using streamhandler
     and formats with RedactingFormatter"""
-    logger = logging.getlogger('user_data')
-    logger.setlevel(logging.INFO)
-    logger.propergate = False
-
-    
-    stream_handler = logging.StreamHandler()
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
     formatter = RedactingFormatter(PII_FIELDS)
+    stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(formatter)
     logger.addHandler(stream_handler)
     return logger
