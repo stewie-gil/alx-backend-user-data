@@ -23,6 +23,7 @@ if auth:
 
 @app.before_request
 def check_authentication():
+    """ checks for auth for various paths"""
     global auth
     if auth is None:
         return
