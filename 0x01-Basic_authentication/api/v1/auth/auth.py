@@ -6,6 +6,7 @@ from typing import List, TypeVar
 from flask import request
 import fnmatch
 
+
 class Auth:
     """Authentication class for handling user authentication."""
 
