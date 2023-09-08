@@ -4,7 +4,7 @@
 
 from typing import List, TypeVar
 from flask import request
-
+import fnmatch
 
 class Auth:
     """Authentication class for handling user authentication."""
@@ -25,7 +25,7 @@ class Auth:
 
         # Check if any excluded path is a prefix of the given path
         for excluded_path in excluded_paths:
-            if path.rstrip("/") == excluded_path.rstrip("/"):
+            if fnmatch.fnmatch(path, excluded_path):
                 return False
 
         return True
