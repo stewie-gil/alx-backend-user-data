@@ -56,3 +56,11 @@ class Auth:
             TypeVar('User'): Info about current user or None if not available.
         """
         return None
+
+    def session_cookie(self, request=None):
+        if request is None:
+            return None
+        session_cookie_name = os.environ.get("SESSION_NAME", "_my_session_id")
+
+        session_id = request.cookies.get(session_cookie_name)
+        return session_id
