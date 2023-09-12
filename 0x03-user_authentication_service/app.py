@@ -5,6 +5,7 @@
 from flask import Flask, jsonify, request
 from auth import Auth
 
+
 AUTH = Auth()
 app = Flask(__name__)
 
@@ -16,7 +17,7 @@ def welcome() -> str:
 
 
 @app.route('/users/', methods=['POST'], strict_slashes=False)
-def register_users():
+def register_users() -> str:
     """register user from data from the request"""
     email = request.form.get('email')
     password = request.form.get('password')
