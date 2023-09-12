@@ -5,6 +5,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from user import User
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 
 from user import Base
 
@@ -35,3 +37,20 @@ class DB:
         self._session.add(userobj)
         self._session.commit()
         return userobj
+
+    def find_user_by(self, **kwargs):
+        try:
+            results = self._session.query(User).filter_by(email="test@test.com").all()
+            
+            if results:
+                return results
+            #else:
+                #raise NoResultsFound('not found')
+            else:
+                raise NoResultFound
+        except InvalidRequestError as e:
+            self._session.rollback()
+            raise e
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        find_user_by
