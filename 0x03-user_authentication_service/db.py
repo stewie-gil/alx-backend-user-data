@@ -39,13 +39,16 @@ class DB:
         return userobj
 
     def find_user_by(self, **kwargs):
+        """ takes in arbitrary keyword arguments and
+        returns the first row found in the users table"""
         try:
-            results = self._session.query(User).filter_by(email="test@test.com").all()
-            
+
+            results = self._session.query(User).filter_by(**kwargs).all()
+
             if results:
-                return results
-            #else:
-                #raise NoResultsFound('not found')
+                for result in results:
+                    return result
+
             else:
                 raise NoResultFound
         except InvalidRequestError as e:
@@ -53,4 +56,14 @@ class DB:
             raise e
 
     def update_user(self, user_id: int, **kwargs) -> None:
-        find_user_by
+        """ update the user’s attributes
+        as passed in the method’s arguments"""
+        record = self.find_user_by(id=user_id)
+        if record:
+            for key, value in kwargs.items():
+                if not hasattr(record, key):
+                    raise ValueError
+                else:
+                    setattr(record, key, value)
+                    self._session.commit()
+                self._session.close()
