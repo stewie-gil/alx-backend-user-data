@@ -44,3 +44,6 @@ class Auth:
             return user
 
 
+
+    def valid_login(self, email: str, password: str) -> bool:
+        

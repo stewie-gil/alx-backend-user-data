@@ -3,8 +3,9 @@
 
 
 from flask import Flask, jsonify
+from auth import Auth
 
-
+AUTH = Auth()
 app = Flask(__name__)
 
 
@@ -12,6 +13,14 @@ app = Flask(__name__)
 def welcome():
     """welcome :) """
     return jsonify({"message": "Bienvenue"})
+
+
+@app.route("/user/", strict_slashes=False, POST)
+def users(email, password):
+    
+
+
+
 
 
 if __name__ == "__main__":
