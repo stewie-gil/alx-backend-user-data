@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-""" hashing"""
+""" Auth.py module to interact with database for auth"""
+
+
 import bcrypt
 from db import DB
 from user import User

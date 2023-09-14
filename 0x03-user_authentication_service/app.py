@@ -16,7 +16,7 @@ def welcome() -> str:
     return jsonify({"message": "Bienvenue"})
 
 
-@app.route('/users/', methods=['POST'], strict_slashes=False)
+@app.route('/users', methods=['POST'], strict_slashes=False)
 def register_users() -> str:
     """register user from data from the request"""
     try:
@@ -29,7 +29,7 @@ def register_users() -> str:
         return jsonify({"message": "email already registered"}), 400
 
 
-@app.route('/sessions/', methods=['POST'], strict_slashes=False)
+@app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login() -> str:
     """epects form data with email and password
     if the informatoin is incorrect abort"""
@@ -44,7 +44,7 @@ def login() -> str:
         abort(401)
 
 
-@app.route('/sessions/', methods=['DELETE'], strict_slashes=False)
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout() -> None:
     """ Destroys the users session id """
     sessoins_id = request.cookie.get('session_id')
@@ -80,7 +80,7 @@ def get_reset_password_token() -> str:
         abort(403)
 
 
-@app.route('reset_password', methods=['PUT'], strict_slashes=Falses)
+@app.route('/reset_password', methods=['PUT'], strict_slashes=False)
 def update_password() -> str:
     """ updates the users password """
     try:
